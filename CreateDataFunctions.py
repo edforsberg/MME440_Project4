@@ -5,6 +5,6 @@ import random
 import math
 from sklearn.utils import shuffle
 
-def CreateData1(nrDataPoints,radius,center,noise,classNr,nrFeatures,grid):
+def CreateData1(nrDataPoints = 1000, nrFeatures = 30):
    
     return data
