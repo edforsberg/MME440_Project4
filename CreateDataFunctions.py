@@ -57,3 +57,29 @@ def normal_data_with_cov(nrObservations, nrFeatures, seed):
     data = np.random.multivariate_normal(mean = mean_array, cov = cov_mat, size=nrObservations)
     
     return data
+
+def CreateCircleCluster(nrDataPoints,radius,center,noise,classNr,nrFeatures,grid):
+    firstCircleFeature = random.randint(0,(nrFeatures-1))
+    secondCircleFeature = (firstCircleFeature + 1) % nrFeatures
+    Xdata = []
+    Ydata = []
+
+    for i in range(nrDataPoints):
+        features = []
+        randR = random.random()*2*math.pi
+        for k in range(nrFeatures):
+            if k == firstCircleFeature:
+                features.append(center[0]+ math.cos(randR)*radius+random.random()*noise)
+            elif k == secondCircleFeature:
+                features.append(center[1]+ math.sin(randR)*radius+random.random()*noise)
+            else:
+                features.append(grid[k]*random.random())
+        Xdata.append(features)
+        Ydata.append(classNr)
+    Xdata = np.array(Xdata)
+    Ydata = np.array(Ydata)
+    return Xdata
+
+def CirclesData(nrObservations, nrFeatures):
+    return CreateCircleCluster(nrObservations,0.1,(0,0),0.2,0,nrFeatures,(10,10))
+    
