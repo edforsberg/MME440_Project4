@@ -3,6 +3,7 @@ import matplotlib
 import numpy as np
 import random
 import math
+import sklearn.datasets as dts
 #from sklearn.utils import shuffle
 
 def normal_data(nrObservations, nrFeatures, seed):
@@ -30,10 +31,11 @@ def uniform_data(nrObservations, nrFeatures, seed):
     data = np.random.uniform(size = (nrObservations, nrFeatures))    
     return data
 
-
-
-
-
-def CreateData1(nrDataPoints = 1000, nrFeatures = 30):
+def normal_data_with_cov(nrObservations, nrFeatures, seed):
+    
+    np.random.seed(seed)
+    cov_mat = np.random.random((nrFeatures,nrFeatures))
+    mean_array = np.zeros(nrFeatures)
+    data = np.random.multivariate_normal(mean = mean_array, cov = cov_mat, size=[nrObservations, nrFeatures])
     
     return data
