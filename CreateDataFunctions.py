@@ -5,7 +5,7 @@ import random
 import math
 #from sklearn.utils import shuffle
 
-def normal_data(nrObservations, nrFeatures):
+def normal_data(nrObservations, nrFeatures, seed):
     """
     Generates a standard normally distibuted dataset with "nrFeatures" dimensions and "nrObservations" observations
     
@@ -13,11 +13,12 @@ def normal_data(nrObservations, nrFeatures):
     :param int nrDataPoints: Number of observations in the dataset
     :return ndarray data: numpy array with data  (one observation per row)
     """
+    np.random.seed(seed)
     data = np.random.normal(loc=0.0, scale=1.0, size=[nrObservations, nrFeatures])
     
     return data
 
-def uniform_data(nrObservations, nrFeatures):
+def uniform_data(nrObservations, nrFeatures, seed):
     """
     Generates a uniformly distibuted dataset with "nrFeatures" dimensions and "nrObservations" observations, all features will lie in the range [0,1]
     
@@ -25,7 +26,7 @@ def uniform_data(nrObservations, nrFeatures):
     :param int nrDataPoints: Number of observations in the dataset
     :return ndarray data: numpy array with data  (one observation per row)
     """
-    
+    np.random.seed(seed)
     data = np.random.uniform(size = (nrObservations, nrFeatures))    
     return data
 
