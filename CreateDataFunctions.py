@@ -34,8 +34,8 @@ def uniform_data(nrObservations, nrFeatures, seed):
 def normal_data_with_cov(nrObservations, nrFeatures, seed):
     
     np.random.seed(seed)
-    cov_mat = np.random.random((nrFeatures,nrFeatures))
+    cov_mat = dts.make_spd_matrix(nrFeatures)
     mean_array = np.zeros(nrFeatures)
-    data = np.random.multivariate_normal(mean = mean_array, cov = cov_mat, size=[nrObservations, nrFeatures])
+    data = np.random.multivariate_normal(mean = mean_array, cov = cov_mat, size=nrObservations)
     
     return data
