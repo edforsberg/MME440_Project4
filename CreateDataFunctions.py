@@ -67,4 +67,14 @@ def spherical_shell_data(nrObservations, nrFeatures, seed, rad_var = 0):
     row_norms = np.sum(np.abs(data)**2,axis=-1)**(1./2) * (np.ones((nrObservations, 1)).flatten() + normal_data(nrObservations, 1, seed).flatten()*rad_var)
     return (data / row_norms[:, None]) #return the normed version of each observation to get it on a circle
 
+def UShape(nrObservations):
+    X1 = np.multiply(np.random.uniform(size = (round(nrObservations*4/6), 3))+np.array([-0.5,0,0]),np.array([4,0.5,0.5]))
+    X2 = np.multiply(np.random.uniform(size = (round(nrObservations/6), 3))+np.array([3,0.5,0]),np.array([0.5,1,0.5]))
+    X3 = np.multiply(np.random.uniform(size = (round(nrObservations/6), 3))+np.array([-4,0.5,0]),np.array([0.5,1,0.5]))
+    
+    X = np.append(X1,X2,axis=0)
+    X = np.append(X,X3,axis=0)
+    
+    return X
+
     
