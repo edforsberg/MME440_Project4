@@ -5,7 +5,7 @@ import matplotlib
 from sklearn.decomposition import PCA
 from sklearn.manifold import Isomap
 
-#def k maeans
+#def k means
 def Kmeans(X,k=2):
     # Clusters data into k clusters, where k can be a vector of different integers, 
     # in which case clustering is made for each k.
@@ -33,6 +33,7 @@ def PlotAllMethods(X,k,reducedFeatures):
     
     X_PCA = pca.transform(X)
     X_ISO = isomap.transform(X)
+    
     
     labels_orig, inertia_orig = Kmeans(X,k)
     labels_PCA, inertia_PCA = Kmeans(X_PCA,k)
