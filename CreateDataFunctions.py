@@ -58,28 +58,13 @@ def normal_data_with_cov(nrObservations, nrFeatures, seed):
     
     return data
 
-def CreateCircleCluster(nrDataPoints,radius,center,noise,classNr,nrFeatures,grid):
-    firstCircleFeature = random.randint(0,(nrFeatures-1))
-    secondCircleFeature = (firstCircleFeature + 1) % nrFeatures
-    Xdata = []
-    Ydata = []
+def spherical_shell_data(nrObservations, nrFeatures, seed, rad_var = 0):
+    '''generates data in the distribution of a spherical shell. The rad_var variable is used to give some variation in
+    the raduis of the spherical shell. the value of rad_var is usually less than 0.5'''
 
-    for i in range(nrDataPoints):
-        features = []
-        randR = random.random()*2*math.pi
-        for k in range(nrFeatures):
-            if k == firstCircleFeature:
-                features.append(center[0]+ math.cos(randR)*radius+random.random()*noise)
-            elif k == secondCircleFeature:
-                features.append(center[1]+ math.sin(randR)*radius+random.random()*noise)
-            else:
-                features.append(grid[k]*random.random())
-        Xdata.append(features)
-        Ydata.append(classNr)
-    Xdata = np.array(Xdata)
-    Ydata = np.array(Ydata)
-    return Xdata
+    data = normal_data(nrObservations, nrFeatures, seed) #make spherical data
+    # calculate norm of each observation with some added noise of mean zero and variance rad_var
+    row_norms = np.sum(np.abs(data)**2,axis=-1)**(1./2) * (np.ones((nrObservations, 1)).flatten() + normal_data(nrObservations, 1, seed).flatten()*rad_var)
+    return (data / row_norms[:, None]) #return the normed version of each observation to get it on a circle
 
-def CirclesData(nrObservations, nrFeatures):
-    return CreateCircleCluster(nrObservations,0.1,(0,0),0.2,0,nrFeatures,(10,10))
     
