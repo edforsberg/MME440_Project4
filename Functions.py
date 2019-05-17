@@ -29,7 +29,7 @@ def PlotElbow(inertia,k):
     
 def PlotAllMethods(X,k,reducedFeatures):
     pca = PCA(reducedFeatures).fit(X)
-    isomap = Isomap(n_components=reducedFeatures).fit(X)
+    isomap = Isomap(n_components=reducedFeatures,n_neighbors=1).fit(X)
     
     X_PCA = pca.transform(X)
     X_ISO = isomap.transform(X)
